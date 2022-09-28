@@ -46,4 +46,29 @@ public class QueueProbs {
         return first.equals(nums);
     }
     // yesterday today tommorow
+
+    public Stack<Integer> sieveOfEratosthenes(int n) {
+        Queue<Integer> fill = new LinkedList<Integer>();
+        Stack<Integer> prime = new Stack<>();
+        for (int i = 2; i <= n; i++) {
+            fill.offer(i);
+        }
+
+        while (!fill.isEmpty()){
+            prime.push(fill.poll());
+            int num = prime.peek();
+            Queue<Integer> copy = fill;
+            Queue<Integer> temp = new LinkedList<>();
+            while(!copy.isEmpty()){
+                if(copy.peek() % num == 0) copy.remove();
+                else{
+                    temp.offer(copy.poll());
+                }
+                fill = temp;
+            }
+
+        }
+        return prime; 
+            
+    }
 }
